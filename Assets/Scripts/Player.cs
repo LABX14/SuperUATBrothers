@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         currentJumps = maxJumps;
+
+        // Setting this game object as the player I am asking for
+        GameManager.instance.player = this.gameObject;
     }
 
     // Update is called once per frame
@@ -80,8 +83,26 @@ public class Player : MonoBehaviour
         return grounded;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D otherObject)
     {
-        IsGrounded();
+        // when the player hits an object with the tag "enemy", it will activate the player death function
+        if (otherObject.gameObject.CompareTag("Enemy"))
+        {
+            GameManager.instance.playerDeath();
+        }
+        // when the player hits an object with the tag "victory", it will take you to the victory scene. 
+        if (otherObject.gameObject.CompareTag("Victory"))
+        {
+            SceneManager.LoadScene("Victory");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D otherObject)
+    {
+        if (otherObject.gameObject.CompareTag("campfire"))
+        {
+            GameManager.instance.campfire = transform.position;
+            Debug.Log("BARt");
+        }
     }
 }

@@ -39,6 +39,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         campfire = new Vector3(0, 0, 0);
+        startSouls = currentSouls;
+    }
+
+    public void playerDeath()
+    {
+        if (currentSouls > 0)
+        {
+            currentSouls -= 1;
+            Destroy(player);
+            Instantiate(playerPrefab, campfire, playerPrefab.transform.rotation);
+        }
+        else
+        {
+            SceneManager.LoadScene("Game Over");
+        }
     }
 
     void Update()
