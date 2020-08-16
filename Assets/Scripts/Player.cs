@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
-
+    bool isAttacking = false;
     public float speed = 3f;
     public float jumpForce = 5f;
     public int currentJumps;
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         currentJumps = maxJumps;
+        
 
         // Setting this game object as the player I am asking for
         GameManager.instance.player = this.gameObject;
@@ -36,15 +37,27 @@ public class Player : MonoBehaviour
 
         // handling animations through code instead of the animation system
         
-        if (rigidBody.velocity.x != 0)
+        
+        if(Input.GetButtonDown("Fire1"))
+        {
+            animator.Play("PlayerAttack");
+        }
+
+        else if (rigidBody.velocity.x != 0)
         {
             animator.Play("PlayerWalk");
         }
-        else
+
+        else if (!isAttacking)
         {
             animator.Play("PlayerIdle");
         }
         
+        /*
+        else 
+        {
+            animator.Play("PlayerIdle");
+        }*/
 
         // This allows my sprite to stay facing in the direction they were moving
         if (rigidBody.velocity.x > 0)
@@ -89,6 +102,7 @@ public class Player : MonoBehaviour
         if (otherObject.gameObject.CompareTag("Enemy"))
         {
             GameManager.instance.playerDeath();
+             
         }
         // when the player hits an object with the tag "victory", it will take you to the victory scene. 
         if (otherObject.gameObject.CompareTag("Victory"))
@@ -104,5 +118,15 @@ public class Player : MonoBehaviour
             GameManager.instance.campfire = transform.position;
             Debug.Log("BARt");
         }
+    }
+
+    void IsAttacking()
+    {
+        isAttacking = true;
+    }
+
+    void IsNotAttacking()
+    {
+        isAttacking = false;
     }
 }

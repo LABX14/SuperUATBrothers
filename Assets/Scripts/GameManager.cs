@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int startSouls;
     public Vector3 campfire;
 
+    public AudioClip playerDead;
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -42,6 +44,9 @@ public class GameManager : MonoBehaviour
         startSouls = currentSouls;
     }
 
+    // if playerDeath activates, 
+    // then it will subtract the number of lives from the player and when that number is less than or equal to zero, 
+    // then it will bring up the game over screen. 
     public void playerDeath()
     {
         if (currentSouls > 0)
@@ -49,6 +54,7 @@ public class GameManager : MonoBehaviour
             currentSouls -= 1;
             Destroy(player);
             Instantiate(playerPrefab, campfire, playerPrefab.transform.rotation);
+            AudioSource.PlayClipAtPoint(playerDead, transform.position);
         }
         else
         {

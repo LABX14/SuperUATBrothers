@@ -13,7 +13,6 @@ public class Pickup : MonoBehaviour
             AudioSource.PlayClipAtPoint(pickupSoundEffect, transform.position);
             GameManager.instance.points += pointValue;
             Destroy(this.gameObject);
-
         }
     }
 }
