@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject player;
 
+    public int points;
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
