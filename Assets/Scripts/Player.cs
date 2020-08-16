@@ -75,7 +75,6 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D hitinfo = Physics2D.Raycast(transform.position, Vector2.down, (height / 2f) + 0.1f);
         bool grounded = (hitinfo.collider != null);
-        animator.SetBool("IsGrounded", grounded);
         return grounded;
     }
 
