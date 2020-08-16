@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         rigidBody.velocity = new Vector2(xMovement, rigidBody.velocity.y);
 
         // handling animations through code instead of the animation system
-        /*
+        
         if (rigidBody.velocity.x != 0)
         {
             animator.Play("PlayerWalk");
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         {
             animator.Play("PlayerIdle");
         }
-        */
+        
 
         // This allows my sprite to stay facing in the direction they were moving
         if (rigidBody.velocity.x > 0)

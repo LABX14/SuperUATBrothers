@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
 
     public int points;
 
+    public int currentSouls;
+    public int startSouls;
+    public Vector3 campfire;
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -34,16 +38,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        campfire = new Vector3(0, 0, 0);
     }
 
     void Update()
     {
+       /*
         if (Input.GetKeyDown(KeyCode.A))
         {
             LoadNextScene();
-        }
-    }
+        }*/
+    } 
+    
 
     public void LoadLevel(int levelIndex)
     {
