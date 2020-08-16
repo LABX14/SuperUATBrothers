@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     void Update()
     {
        /*
@@ -91,5 +92,9 @@ public class GameManager : MonoBehaviour
     public void LoadNextScene()
     {
         LoadLevel(currentSceneIndex + 1);
+    }
+    public void LoadPreviousScene()
+    {
+        LoadLevel(currentSceneIndex - 1);
     }
 }
