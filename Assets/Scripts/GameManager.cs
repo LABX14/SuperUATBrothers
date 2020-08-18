@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentSouls > 0)
         {
+            // If the current player 
             currentSouls -= 1;
             Destroy(player);
             Instantiate(playerPrefab, campfire, playerPrefab.transform.rotation);
@@ -58,7 +59,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Game Over");
+            // Loads into the Game Over Scene
+            SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -99,8 +101,13 @@ public class GameManager : MonoBehaviour
     {
         LoadLevel(currentSceneIndex + 1);
     }
-    public void LoadPreviousScene()
+    public void LoadGameScene()
     {
-        LoadLevel(currentSceneIndex - 1);
+        LoadLevel("Prototype");
+    }
+
+    public void LoadMainMenu()
+    {
+        LoadLevel("TitleScreen");
     }
 }

@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public int currentJumps;
     public int maxJumps = 2;
     public float height = 4.1f;
+    public AudioClip enemyDeath;
+    public AudioClip playerHit;
 
     private Rigidbody2D rigidBody;
     private SpriteRenderer sprite;
@@ -41,9 +43,9 @@ public class Player : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             animator.Play("PlayerAttack");
+            AudioSource.PlayClipAtPoint(playerHit, transform.position);
         }
-
-        else if (rigidBody.velocity.x != 0)
+        else if (!isAttacking && rigidBody.velocity.x != 0)
         {
             animator.Play("PlayerWalk");
         }
@@ -101,13 +103,21 @@ public class Player : MonoBehaviour
         // when the player hits an object with the tag "enemy", it will activate the player death function
         if (otherObject.gameObject.CompareTag("Enemy"))
         {
-            GameManager.instance.playerDeath();
-             
+            if (isAttacking)
+            {
+                Destroy(otherObject.gameObject);
+                AudioSource.PlayClipAtPoint(enemyDeath, transform.position);
+            }
+            else
+            {
+                GameManager.instance.playerDeath();
+            }
         }
         // when the player hits an object with the tag "victory", it will take you to the victory scene. 
         if (otherObject.gameObject.CompareTag("Victory"))
         {
             SceneManager.LoadScene("Victory");
+
         }
     }
 
@@ -115,6 +125,7 @@ public class Player : MonoBehaviour
     {
         if (otherObject.gameObject.CompareTag("campfire"))
         {
+            //when your character touches the checkpoint, set its new spawn position to be at the checkpoint
             GameManager.instance.campfire = transform.position;
             Debug.Log("BARt");
         }
@@ -122,11 +133,13 @@ public class Player : MonoBehaviour
 
     void IsAttacking()
     {
+        // When the player is attacks, have it be called on the animator
         isAttacking = true;
     }
 
     void IsNotAttacking()
     {
+        // When the player is attacks, set
         isAttacking = false;
     }
 }

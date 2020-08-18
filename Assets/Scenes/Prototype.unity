@@ -1058,6 +1058,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 215439113, guid: bdc613d758f40ff43ba98a5c9a661e41, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc613d758f40ff43ba98a5c9a661e41, type: 3}
 --- !u!1001 &5833296673687959895
@@ -1132,6 +1136,11 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5833296674064950236, guid: a48b9a8cf30a51744b821500a788aa98,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5833296674064950233, guid: a48b9a8cf30a51744b821500a788aa98,
         type: 3}
       propertyPath: speed
@@ -1142,6 +1151,16 @@ PrefabInstance:
       propertyPath: currentJumps
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5833296674064950233, guid: a48b9a8cf30a51744b821500a788aa98,
+        type: 3}
+      propertyPath: enemyDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: 49cd9562e247b764b84e440e6cdc0e2d, type: 3}
+    - target: {fileID: 5833296674064950233, guid: a48b9a8cf30a51744b821500a788aa98,
+        type: 3}
+      propertyPath: playerHit
+      value: 
+      objectReference: {fileID: 8300000, guid: de4630939446839479bf2ecfac0ed698, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a48b9a8cf30a51744b821500a788aa98, type: 3}
 --- !u!1001 &8592896639396319584

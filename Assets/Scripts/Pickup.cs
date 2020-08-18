@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pickup : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Pickup : MonoBehaviour
             AudioSource.PlayClipAtPoint(pickupSoundEffect, transform.position);
             GameManager.instance.points += pointValue;
             Destroy(this.gameObject);
+            SceneManager.LoadScene("Victory");
         }
     }
 }
