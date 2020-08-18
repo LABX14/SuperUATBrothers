@@ -5,22 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public int currentSceneIndex = 0;
+    public static GameManager instance; // This makes instance connected to the game manager
+    public int currentSceneIndex = 0; // This sets the current scene index to 0
 
-    public GameObject playerPrefab;
-    public GameObject player;
+    public GameObject playerPrefab; // sets as playerPrefab as Game Object
+    public GameObject player; // sets player as a Game Object
 
-    public int points;
+    public int points = 0; // Set for points
 
-    public int currentSouls;
-    public int startSouls;
-    public Vector3 campfire;
+    public int currentSouls; // this determines how many lives the player has at the moment
+    public int startSouls; // this determines how many lives the player starts with
+    public Vector3 campfire; // this is for the player's checkpoint 
 
-    public AudioClip playerDead;
+    public AudioClip playerDead; // this is to play the audio for when the player is killed
 
     void OnEnable()
     {
+        // this loads the next scene
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -28,11 +29,13 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
+            //this keeps the game manager from being destroyed
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
         {
+            // if instance is not null, then destroy the game manager. 
             Debug.LogError("[GameManager] Attempted to create a second instance of GameManager");
             Destroy(this);
         }
@@ -40,8 +43,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // this sets the location of the spawn point for the player
         campfire = new Vector3(0, 0, 0);
         startSouls = currentSouls;
+
     }
 
     // if playerDeath activates, 
@@ -51,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentSouls > 0)
         {
-            // If the current player 
+            // If the current player lives is equal to or less than zero then the player dies
             currentSouls -= 1;
             Destroy(player);
             Instantiate(playerPrefab, campfire, playerPrefab.transform.rotation);
@@ -77,11 +82,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
+        // this will call the level index
         SceneManager.LoadScene(levelIndex);
     }
 
     public void LoadLevel(string levelName)
     {
+        // this will load the level name 
         SceneManager.LoadScene(levelName);
     }
 
@@ -93,21 +100,33 @@ public class GameManager : MonoBehaviour
     /// <param name="mode"></param>
     public void OnSceneLoaded(Scene Scene, LoadSceneMode mode)
     {
+        // this determines if the scene has loaded
         Debug.Log("Scene finished loading");
         currentSceneIndex = Scene.buildIndex;
     }
 
     public void LoadNextScene()
     {
+        // this loads the next scene in the build settings 
         LoadLevel(currentSceneIndex + 1);
     }
     public void LoadGameScene()
     {
+        // this loads the main game scene
         LoadLevel("Prototype");
     }
 
     public void LoadMainMenu()
     {
+        // this loads the player into the main menu
         LoadLevel("TitleScreen");
+    }
+
+    public void Victory()
+    {
+        if (points == 200)
+        {
+            LoadLevel("Victory");
+        }
     }
 }

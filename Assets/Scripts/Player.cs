@@ -38,20 +38,24 @@ public class Player : MonoBehaviour
         rigidBody.velocity = new Vector2(xMovement, rigidBody.velocity.y);
 
         // handling animations through code instead of the animation system
-        
-        
+
+        transform.Rotate(Vector3.forward * -200);
+
         if(Input.GetButtonDown("Fire1"))
         {
+            // this plays the attack animation along with the audio
             animator.Play("PlayerAttack");
             AudioSource.PlayClipAtPoint(playerHit, transform.position);
         }
         else if (!isAttacking && rigidBody.velocity.x != 0)
         {
+            // this plays the walking animation
             animator.Play("PlayerWalk");
         }
 
         else if (!isAttacking)
         {
+            // this plays the idle animation
             animator.Play("PlayerIdle");
         }
         
@@ -93,6 +97,8 @@ public class Player : MonoBehaviour
 
     bool IsGrounded()
     {
+        // this will detect if the player is grounded 
+        Debug.Log("I am on grounded");
         RaycastHit2D hitinfo = Physics2D.Raycast(transform.position, Vector2.down, (height / 2f) + 0.1f);
         bool grounded = (hitinfo.collider != null);
         return grounded;
@@ -105,11 +111,14 @@ public class Player : MonoBehaviour
         {
             if (isAttacking)
             {
+                // if the player is performing their attack animationa and they collide with the enemy
+                // then destroy the enemy and the enemy death sound
                 Destroy(otherObject.gameObject);
                 AudioSource.PlayClipAtPoint(enemyDeath, transform.position);
             }
             else
             {
+                // if not, then the player dies
                 GameManager.instance.playerDeath();
             }
         }
