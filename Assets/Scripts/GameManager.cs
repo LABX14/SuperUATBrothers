@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // if instance is not null, then destroy the game manager. 
-            Debug.LogError("[GameManager] Attempted to create a second instance of GameManager");
+            //Debug.LogError("[GameManager] Attempted to create a second instance of GameManager");
             Destroy(this);
         }
     }

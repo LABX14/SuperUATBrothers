@@ -39,7 +39,8 @@ public class Player : MonoBehaviour
 
         // handling animations through code instead of the animation system
 
-        transform.Rotate(Vector3.forward * -200);
+        //IMPORTANT FOR BACKGROUND MUSIC
+        //transform.Rotate(Vector3.forward * -200);
 
         if(Input.GetButtonDown("Fire1"))
         {
